@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
+using GameEvents;
 using UnityEngine;
 
 public enum GameEvent
 {
     Death,
     UseItem,
-  
+    AddHazard,
 
 }
 //send parameters when event gets evoked
 // invoike each event
 //map event types to listeners
-public delegate void GameEventListener();
+public delegate void GameEventListener(IGameEvent eventParameters);
 
 public static class EventManager
 {
@@ -43,7 +44,7 @@ public static class EventManager
         }
     }
 
-    public static void CallEvent(GameEvent gameEvent)
+    public static void CallEvent(GameEvent gameEvent, IGameEvent eventParameters)
     {
         List<GameEventListener> listeners;
         bool key = GameEventDictionary.TryGetValue(gameEvent, out listeners);
@@ -51,7 +52,7 @@ public static class EventManager
         {
             foreach (GameEventListener item in listeners)
             {
-                item();
+                item(eventParameters);
             }
         }
 
