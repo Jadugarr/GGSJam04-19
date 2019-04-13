@@ -25,32 +25,34 @@ namespace Hazard.Components
 
         private void OnExecuteClicked()
         {
+            EventManager.CallEvent(GameEvent.ExecutionTriggered, new ExecutionTriggeredEventParams(selectedHazards));
+            ClearSelection();
+        }
+
+        private void ClearSelection()
+        {
+            for (int i = 0; i < availableSlots.Length; i++)
+            {
+                if (availableSlots[i] != null)
+                {
+                    DestroyHazard(availableSlots[i].HazardType);
+                }
+            }
         }
 
         private void OnRemoveHazard(IGameEvent eventparameters)
         {
             RemoveHazardEventParams evtParams = (RemoveHazardEventParams) eventparameters;
-            if (DestroyHazard(evtParams.HazardToRemove))
-            {
-                selectedHazards &= ~evtParams.HazardToRemove;
-
-                CheckButtonState();
-            }
+            DestroyHazard(evtParams.HazardToRemove);
         }
 
         private void OnHazardAdded(IGameEvent eventparameters)
         {
             AddHazardEventParams evtParams = (AddHazardEventParams) eventparameters;
-
-            if (SpawnHazard(evtParams.HazardType))
-            {
-                selectedHazards |= evtParams.HazardType;
-
-                CheckButtonState();
-            }
+            SpawnHazard(evtParams.HazardType);
         }
 
-        private bool DestroyHazard(HazardType hazardType)
+        private void DestroyHazard(HazardType hazardType)
         {
             for (int i = 0; i < availableSlots.Length; i++)
             {
@@ -61,15 +63,15 @@ namespace Hazard.Components
                     availableSlots[i] = null;
                     
                     EventManager.CallEvent(GameEvent.HazardRemoved, new HazardRemovedEventParams(hazardType));
-                    
-                    return true;
+                    selectedHazards &= ~hazardType;
+
+                    CheckButtonState();
+                    return;
                 }
             }
-
-            return false;
         }
 
-        private bool SpawnHazard(HazardType hazardType)
+        private void SpawnHazard(HazardType hazardType)
         {
             for (int i = 0; i < availableSlots.Length; i++)
             {
@@ -79,12 +81,13 @@ namespace Hazard.Components
                     availableSlots[i].SetHazardType(hazardType);
                     
                     EventManager.CallEvent(GameEvent.HazardAdded, new HazardAddedEventParams(hazardType));
-                    
-                    return true;
+                    selectedHazards |= hazardType;
+
+                    CheckButtonState();
+
+                    return;
                 }
             }
-
-            return false;
         }
 
         private void CheckButtonState()
