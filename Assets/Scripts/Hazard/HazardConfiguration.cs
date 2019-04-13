@@ -8,7 +8,8 @@ namespace Hazard
         private static Dictionary<HazardType, bool> hazardMap = new Dictionary<HazardType, bool>()
         {
             {HazardType.Water | HazardType.Electricity, true},
-            {HazardType.Fire, true}
+            {HazardType.Fire, true},
+            {HazardType.Rock, true}
         };
 
         public static bool IsCombinationDeadly(HazardType encounteredHazards)
