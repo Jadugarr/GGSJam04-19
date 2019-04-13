@@ -25,11 +25,15 @@ namespace Hazard.Components
             _hazardButton.onClick.AddListener(OnHazardButtonClicked);
             EventManager.AddListener(GameEvent.HazardAdded, OnHazardAdded);
             EventManager.AddListener(GameEvent.HazardRemoved, OnHazardRemoved);
+            EventManager.AddListener(GameEvent.ExecutionTriggered, OnExecutionTriggered);
+            EventManager.AddListener(GameEvent.ExecutionCompleted, OnExecutionCompleted);
         }
 
         private void OnDestroy()
         {
             _hazardButton.onClick.RemoveListener(OnHazardButtonClicked);
+            EventManager.RemoveListener(GameEvent.HazardAdded, OnHazardAdded);
+            EventManager.RemoveListener(GameEvent.HazardRemoved, OnHazardRemoved);
         }
 
         public void SetHazardType(HazardType hazardType)
@@ -40,7 +44,7 @@ namespace Hazard.Components
 
         private void OnHazardButtonClicked()
         {
-            if (_hazardButtonState == HazardButtonState.Select)
+            if (_hazardButtonState == HazardButtonState.Select && gameObject.activeSelf)
             {
                 EventManager.CallEvent(GameEvent.AddHazard, new AddHazardEventParams(_hazardType));
             }
@@ -74,6 +78,16 @@ namespace Hazard.Components
             {
                 SetButtonState(HazardButtonState.Select);
             }
+        }
+
+        private void OnExecutionTriggered(IGameEvent eventparameters)
+        {
+            gameObject.SetActive(false);
+        }
+
+        private void OnExecutionCompleted(IGameEvent eventparameters)
+        {
+            gameObject.SetActive(true);
         }
     }
 }
