@@ -11,6 +11,7 @@ public enum GameEvent
     HazardAdded,
     HazardRemoved,
     ExecutionTriggered,
+    CharacterSelected,
 
 }
 //send parameters when event gets evoked
