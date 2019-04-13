@@ -23,6 +23,7 @@ namespace Configurations
         [Header("Death Sprites")] 
         [SerializeField] public Sprite ElectrocutionSprite;
         [SerializeField] public Sprite RockDeathSprite;
+        [SerializeField] public Sprite FireDeathSprite;
 
         private Dictionary<HazardType, Sprite> hazardSpriteMap;
         private Dictionary<HazardType, Sprite> deathSpriteMap;
@@ -75,6 +76,7 @@ namespace Configurations
             deathSpriteMap = new Dictionary<HazardType, Sprite>()
             {
                 {HazardType.Rock, RockDeathSprite},
+                {HazardType.Fire, FireDeathSprite},
                 {HazardType.Electricity | HazardType.Water, ElectrocutionSprite}
             };
         }

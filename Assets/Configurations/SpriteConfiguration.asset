@@ -16,6 +16,8 @@ MonoBehaviour:
   LockIcon: {fileID: 21300000, guid: b0c0e0804d968ff4588a05dcf5edd56b, type: 3}
   ElectricityIcon: {fileID: 21300000, guid: 7b9c40b7f3c258140aa3c62fafdbea2a, type: 3}
   RockIcon: {fileID: 21300000, guid: c282bf4482a909940bd4636a03a83b08, type: 3}
+  WaterIcn: {fileID: 21300000, guid: c5840ee3ae0295149ba13f946cdcde59, type: 3}
   ElectrocutionSprite: {fileID: 21300000, guid: 6c2c02d9c4756d84eb19023a5273762d,
     type: 3}
   RockDeathSprite: {fileID: 21300000, guid: 389e15b8ae717964994c58fc7f8787a5, type: 3}
+  FireDeathSprite: {fileID: 21300000, guid: b2be0998dece3424d8bbc39057b0485d, type: 3}

@@ -59,6 +59,7 @@ namespace Hazard
             Sequence tweenSequence = DOTween.Sequence();
             if (isDeadlyCombination)
             {
+                EventManager.CallEvent(GameEvent.Death, new DeathEventParams(_hazardsForExecution));
                 Sprite deathSprite =
                     Configurations.Configurations.SpriteConfiguration.GetDeathSprite(_hazardsForExecution);
 

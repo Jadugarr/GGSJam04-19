@@ -12,7 +12,7 @@ public enum GameEvent
     HazardRemoved,
     ExecutionTriggered,
     CharacterSelected,
-    ExecutionCompleted
+    ExecutionCompleted,
 }
 //send parameters when event gets evoked
 // invoike each event
