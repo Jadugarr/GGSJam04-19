@@ -222,6 +222,7 @@ Transform:
   - {fileID: 1475433276}
   - {fileID: 15256999}
   - {fileID: 484542450}
+  - {fileID: 874281507}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -241,9 +242,11 @@ MonoBehaviour:
   - {fileID: 1475433276}
   - {fileID: 15256999}
   - {fileID: 484542450}
+  combinedPosition: {fileID: 874281507}
   executeButton: {fileID: 602968190}
   hazardPrefab: {fileID: 3449765200095284347, guid: 7b8f34f33107bf2408842664453d9c4e,
     type: 3}
+  mergeDuration: 1
 --- !u!1 &264792599
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +515,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 60c5c9ec24e71854896d03399050664a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c832010ea5a7b8b44b24c0aec807bce9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -619,6 +622,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &874281506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 874281507}
+  m_Layer: 0
+  m_Name: CombinedPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &874281507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874281506}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.123, y: 1.478, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 138115743}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1095511695
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,9 +685,9 @@ MonoBehaviour:
   originPosition: {fileID: 1455397923}
   executionPosition: {fileID: 1130741611}
   resultPosition: {fileID: 1685008458}
-  walkToExecutionDuration: 3
-  walkToResultDuration: 3
-  walkToOrigingDuration: 5
+  walkToExecutionDuration: 1
+  walkToResultDuration: 1
+  walkToOriginDuration: 2
 --- !u!4 &1095511697
 Transform:
   m_ObjectHideFlags: 0

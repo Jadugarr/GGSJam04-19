@@ -10,5 +10,9 @@ namespace Hazard
         Water = 2,
         Electricity = 4,
         Blades = 8,
+        Rock = 16,
+        Pet = 32,
+        Salt = 64,
+        Blade = 128,
     }
 }

@@ -17,6 +17,7 @@ namespace Hazard
         [FormerlySerializedAs("walkToOrigingDuration")] [SerializeField] private float walkToOriginDuration;
 
         private HazardType _hazardsForExecution;
+        private bool isDeadlyCombination;
         
         private void Awake()
         {
@@ -33,17 +34,19 @@ namespace Hazard
         {
             ExecutionTriggeredEventParams evtParams = (ExecutionTriggeredEventParams) eventparameters;
             _hazardsForExecution = evtParams.SelectedHazards;
+            isDeadlyCombination = HazardConfiguration.IsCombinationDeadly(_hazardsForExecution);
             Tween walkToExecutionTween =
                 characterTransform.DOMove(executionPosition.position, walkToExecutionDuration);
             walkToExecutionTween.onComplete += OnWalkToExecutionComplete;
-
         }
 
         private void OnWalkToExecutionComplete()
         {
-            if (HazardConfiguration.IsCombinationDeadly(_hazardsForExecution))
+            Sequence tweenSequence = DOTween.Sequence();
+            if (isDeadlyCombination)
             {
                 Debug.Log("He's fucking dead.");
+                tweenSequence.Append(characterTransform.DORotate(new Vector3(0, 0, 180), 1f));
             }
             else
             {
@@ -55,6 +58,7 @@ namespace Hazard
             
             Tween walkToResultTween =
                 characterTransform.DOMove(resultPosition.position, walkToResultDuration);
+            tweenSequence.Append(walkToResultTween);
             walkToResultTween.onComplete += OnWalkToResultComplete;
         }
 
