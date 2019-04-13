@@ -7,6 +7,9 @@ public enum GameEvent
     Death,
     UseItem,
     AddHazard,
+    RemoveHazard,
+    HazardAdded,
+    HazardRemoved,
 
 }
 //send parameters when event gets evoked
