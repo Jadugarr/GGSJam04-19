@@ -5,7 +5,7 @@ namespace Hazard.Components
 {
     public class HazardComponent : MonoBehaviour
     {
-        [SerializeField] private TMP_Text _hazardName;
+        [SerializeField] private SpriteRenderer _hazardIcon;
 
         private HazardType _hazardType;
 
@@ -18,7 +18,7 @@ namespace Hazard.Components
         {
             _hazardType = hazardType;
 
-            _hazardName.text = hazardType.ToString();
+            _hazardIcon.sprite = Configurations.Configurations.SpriteConfiguration.GetSpriteByHazardType(hazardType);
         }
     }
 }

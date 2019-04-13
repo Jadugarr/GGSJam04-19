@@ -2,7 +2,7 @@ using System;
 
 namespace Hazard
 {
-    [Flags]
+    [Flags, Serializable]
     public enum HazardType
     {
         None = 0,
