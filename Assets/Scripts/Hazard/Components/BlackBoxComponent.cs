@@ -15,35 +15,54 @@ namespace Hazard.Components
         private HazardType selectedHazards;
 
         private HazardComponent[] availableSlots = new HazardComponent[3];
+        private bool isExecuting;
 
         private void Awake()
         {
             EventManager.AddListener(GameEvent.AddHazard, OnHazardAdded);
             EventManager.AddListener(GameEvent.RemoveHazard, OnRemoveHazard);
+            EventManager.AddListener(GameEvent.ExecutionCompleted, OnExecutionCompleted);
 
             executeButton.onClick.AddListener(OnExecuteClicked);
             CheckButtonState();
         }
 
+        private void OnDestroy()
+        {
+            EventManager.RemoveListener(GameEvent.AddHazard, OnHazardAdded);
+            EventManager.RemoveListener(GameEvent.RemoveHazard, OnRemoveHazard);
+            EventManager.RemoveListener(GameEvent.ExecutionCompleted, OnExecutionCompleted);
+        }
+
+        private void OnExecutionCompleted(IGameEvent eventparameters)
+        {
+            isExecuting = false;
+        }
+
         private void OnExecuteClicked()
         {
-            if (HazardConfiguration.IsCombinationDeadly(selectedHazards))
+            if (!isExecuting)
             {
-                Sequence tweenSequence = DOTween.Sequence();
-                for (int i = 0; i < availableSlots.Length; i++)
+                executeButton.gameObject.SetActive(false);
+                isExecuting = true;
+                if (HazardConfiguration.IsCombinationDeadly(selectedHazards))
                 {
-                    HazardComponent currentSlot = availableSlots[i];
-                    if (currentSlot != null)
+                    Sequence tweenSequence = DOTween.Sequence();
+                    for (int i = 0; i < availableSlots.Length; i++)
                     {
-                        tweenSequence.Join(currentSlot.transform.DOMove(combinedPosition.position, mergeDuration));
+                        HazardComponent currentSlot = availableSlots[i];
+                        if (currentSlot != null)
+                        {
+                            tweenSequence.Join(currentSlot.transform.DOMove(combinedPosition.position, mergeDuration));
+                        }
                     }
-                }
 
-                tweenSequence.onComplete += OnCombinationComplete;
-            }
-            else
-            {
-                StartExecution();
+                    tweenSequence.onComplete += OnCombinationComplete;
+                }
+                else
+                {
+                    StartExecution();
+                }
             }
         }
 
