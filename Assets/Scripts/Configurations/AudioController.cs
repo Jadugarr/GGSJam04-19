@@ -1,3 +1,4 @@
+using System;
 using GameEvents;
 using Hazard;
 using UnityEngine;
@@ -11,12 +12,21 @@ namespace Configurations
         [SerializeField] private AudioClip _fieryDeathSound;
         [SerializeField] private AudioClip _crushedDeathSound;
         [SerializeField] private AudioClip _electroDeathSound;
+        [SerializeField] private AudioClip _buttonClickSound;
 
         private void Awake()
         {
             EventManager.AddListener(GameEvent.Death, OnDeath);
             EventManager.AddListener(GameEvent.ExecutionCompleted, OnExecutionCompleted);
             EventManager.AddListener(GameEvent.StopSoundEffects, OnStopSoundEffects);
+            EventManager.AddListener(GameEvent.AddHazard, OnHazardClicked);
+            EventManager.AddListener(GameEvent.RemoveHazard, OnHazardClicked);
+        }
+
+        private void OnHazardClicked(IGameEvent eventParameters)
+        {
+            _audioSource.clip = _buttonClickSound;
+            _audioSource.Play();
         }
 
         private void OnStopSoundEffects(IGameEvent eventparameters)
@@ -28,6 +38,8 @@ namespace Configurations
         {
             EventManager.RemoveListener(GameEvent.Death, OnDeath);
             EventManager.RemoveListener(GameEvent.ExecutionCompleted, OnExecutionCompleted);
+            EventManager.RemoveListener(GameEvent.AddHazard, OnHazardClicked);
+            EventManager.RemoveListener(GameEvent.RemoveHazard, OnHazardClicked);
         }
 
         private void OnDeath(IGameEvent eventparameters)

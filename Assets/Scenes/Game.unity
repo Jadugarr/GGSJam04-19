@@ -1035,6 +1035,7 @@ MonoBehaviour:
   _fieryDeathSound: {fileID: 8300000, guid: b65590ac80595fb4582e916397025c5f, type: 3}
   _crushedDeathSound: {fileID: 8300000, guid: e6e886e52db895a4e9eedc474bda8306, type: 3}
   _electroDeathSound: {fileID: 8300000, guid: b50230864302ca24ca1961d3f9d909fe, type: 3}
+  _buttonClickSound: {fileID: 8300000, guid: d74d988ba5b958841a607b9f7cba5888, type: 3}
 --- !u!82 &966071018
 AudioSource:
   m_ObjectHideFlags: 0
