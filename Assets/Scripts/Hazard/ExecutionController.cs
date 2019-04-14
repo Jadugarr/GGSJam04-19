@@ -92,6 +92,7 @@ namespace Hazard
 
         private void OnDeathAnimationComplete()
         {
+            EventManager.CallEvent(GameEvent.StopSoundEffects, null);
             characterSpriteRenderer.sprite = defaultCharacterSprite;
             _bloomSettings.intensity.value = 0;
             _spriteGlowEffect.OutlineWidth = 0;

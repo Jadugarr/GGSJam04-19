@@ -19,11 +19,15 @@ namespace Configurations
         [SerializeField] public Sprite ElectricityIcon;
         [SerializeField] public Sprite RockIcon;
         [SerializeField] public Sprite WaterIcn;
+        [SerializeField] public Sprite SaltIcn;
+        [SerializeField] public Sprite KerosineIcn;
+        [SerializeField] public Sprite SandwichIcn;
 
         [Header("Death Sprites")] 
         [SerializeField] public Sprite ElectrocutionSprite;
         [SerializeField] public Sprite RockDeathSprite;
         [SerializeField] public Sprite FireDeathSprite;
+        [SerializeField] public Sprite FoodPoisoningDeathSprite;
 
         private Dictionary<HazardType, Sprite> hazardSpriteMap;
         private Dictionary<HazardType, Sprite> deathSpriteMap;
@@ -68,6 +72,9 @@ namespace Configurations
                 {HazardType.Electricity, ElectricityIcon},
                 {HazardType.Rock, RockIcon},
                 {HazardType.Water, WaterIcn},
+                {HazardType.Sandwich, SandwichIcn},
+                {HazardType.Salt, SaltIcn},
+                {HazardType.Kerosine, KerosineIcn}
             };
         }
 
@@ -76,8 +83,9 @@ namespace Configurations
             deathSpriteMap = new Dictionary<HazardType, Sprite>()
             {
                 {HazardType.Rock, RockDeathSprite},
-                {HazardType.Fire, FireDeathSprite},
-                {HazardType.Electricity | HazardType.Water, ElectrocutionSprite}
+                {HazardType.Fire | HazardType.Kerosine, FireDeathSprite},
+                {HazardType.Electricity | HazardType.Water | HazardType.Salt, ElectrocutionSprite},
+                {HazardType.Sandwich, FoodPoisoningDeathSprite}
             };
         }
     }

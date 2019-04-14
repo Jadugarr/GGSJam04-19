@@ -16,6 +16,12 @@ namespace Configurations
         {
             EventManager.AddListener(GameEvent.Death, OnDeath);
             EventManager.AddListener(GameEvent.ExecutionCompleted, OnExecutionCompleted);
+            EventManager.AddListener(GameEvent.StopSoundEffects, OnStopSoundEffects);
+        }
+
+        private void OnStopSoundEffects(IGameEvent eventparameters)
+        {
+            _audioSource.Stop();
         }
 
         private void OnDestroy()

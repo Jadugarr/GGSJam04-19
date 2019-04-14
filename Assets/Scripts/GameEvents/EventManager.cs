@@ -13,6 +13,7 @@ public enum GameEvent
     ExecutionTriggered,
     CharacterSelected,
     ExecutionCompleted,
+    StopSoundEffects,
 }
 //send parameters when event gets evoked
 // invoike each event
